@@ -11,6 +11,7 @@ import {
   MAX_MONTH_SPAN,
   MIN_MONTH_SPAN,
   MAX_NUM_OF_SUBTRACKS,
+  COURSE_NAMES,
 } from './constants'
 
 import { fill, hexToRgb, colourIsLight, addMonthsToYear, addMonthsToYearAsDate, nextColor, randomTitle } from './utils'
@@ -24,7 +25,7 @@ export const buildQuarterCells = () => {
     const e = addMonthsToYear(START_YEAR, startMonth + MONTHS_PER_QUARTER)
     v.push({
       id: `${s.year}-q${quarter}`,
-      title: `Q${quarter} ${s.year}`,
+      title: `${s.year} ${quarter}분기`,
       start: new Date(`${s.year}-${s.month}-01`),
       end: new Date(`${e.year}-${e.month}-01`),
     })
@@ -51,13 +52,13 @@ export const buildMonthCells = () => {
 export const buildTimebar = () => [
   {
     id: 'quarters',
-    title: 'Quarters',
+    title: '분기',
     cells: buildQuarterCells(),
     style: {},
   },
   {
     id: 'months',
-    title: 'Months',
+    title: '월',
     cells: buildMonthCells(),
     useAsGrid: true,
     style: {},
@@ -125,7 +126,7 @@ export const buildTrack = trackId => {
   const tracks = fill(Math.floor(Math.random() * MAX_NUM_OF_SUBTRACKS) + 1).map(i => buildSubtrack(trackId, i + 1))
   return {
     id: `track-${trackId}`,
-    title: `Track ${trackId}`,
+    title: COURSE_NAMES[`${trackId}` - 1],
     elements: buildElements(trackId),
     tracks,
     // hasButton: true,

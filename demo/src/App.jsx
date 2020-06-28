@@ -74,7 +74,7 @@ class App extends Component {
     const end = new Date(`${START_YEAR + NUM_OF_YEARS}`)
     return (
       <div className="app">
-        <h1 className="title">React Timelines</h1>
+        <h1 className="title">2020 연간일정</h1>
         <Timeline
           scale={{
             start,
