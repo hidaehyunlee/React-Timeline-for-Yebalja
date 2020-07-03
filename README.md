@@ -1,5 +1,27 @@
 # react-timelines 사용법
 
+#### 고민점
+
+- 부트캠프별로 다른 모집단계 통일할 수 있는 방안?
+
+  - 피씬같은 용어를 코딩테스트로 통일하는게 나을지? 
+
+- 엘리먼트 생성 함수를 부트캠프별로 만들건지, **모집단계별**로 만들건지
+
+- 엘리먼트 start, end 어떻게 값 넣을지.
+
+  - 현재는 
+
+    ```
+    const start = addMonthsToYearAsDate(START_YEAR, month) //
+        const end = addMonthsToYearAsDate(START_YEAR, month + monthSpan) //
+    ```
+
+#### 할일
+
+- addMonthsToYearAsDate, addMonthsToYearAsDate 함수 이해하기
+
+
 #### 사용법
 
 `npm install react-timelines`한 뒤 `demo` 폴더만 가져와서 수정해서 사용하면 되는듯.
@@ -8,9 +30,9 @@
 
 #### 용어 정리
 
-cell = 각 행, 열
+cell = 각 행, 열의 칸
 
-element = 일정 
+element = start와 end 값을 가진 일정 
 
 
 
@@ -24,9 +46,9 @@ element = 일정
 
 #### 아이디어
 
-지금 이 타임라인은 **year(1) / quarter(1~4) / month(1~12)** 구조로 만들어져 있음. 
+지금 이 타임라인은 **year(1) / quarter(1-4) / month(1-12)** 구조로 만들어져 있음. 
 
-이걸 **year(1) / month(1~12) / week(1~4)** 로 바꾸려면 함수들을 아예 새로 다 짜야함.
+이걸 **year(1) / month(1-12) / week(1-4)** 로 바꾸려면 함수들을 아예 새로 다 짜야함.
 
 만약 기존 함수를 그냥 사용하려면, 아래처럼 변수 이름과 값만 바꾸는 방법이 ...
 
@@ -36,7 +58,7 @@ element = 일정
 
 쿼터(4)*3년 을 하면 총 12칸의 cell이 생김. title만 1~12로 바꿔주면 됨.
 
-그런데... 일정을 넣기 시작하면 매우 헷갈리기 때문에 이 방법은 쓰면 안되고, 새로  month(1~12) / week(1~4) 를 이용해서 계산을 할 수 있도록 `utils.js`의 함수를 수정해줘야할듯.
+그런데... 일정을 넣기 시작하면 매우 헷갈리기 때문에 이 방법은 쓰면 안되고, 새로  month(1-12) / week(1-4) 를 이용해서 계산을 할 수 있도록 `utils.js`의 함수를 수정해줘야할듯.
 
 
 
@@ -107,7 +129,7 @@ export const buildMonthCells = () => {
 
 ```
 
-- 1~12월 달이 나오던걸, 1~4 주가 반복되게 바꿈
+- 1-12월 달이 나오던걸, 1-4 주가 반복되게 바꿈
   -  `title: WEEK_NAMES[i % 4],`
 
 #### buildTimebar
