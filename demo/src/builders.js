@@ -51,7 +51,7 @@ export const buildMonthCells = () => {
   return v
 }
 
-// 월/주 같은 상단 행
+// 월,주 같은 상단 행
 export const buildTimebar = () => [
   {
     id: 'quarters',
@@ -87,8 +87,9 @@ export const buildElement = ({ trackId, start, end, i }) => {
   }
 }
 
-export const buildTrackStartGap = () => 6 //엘리먼트 언제 시작할지.
-export const buildElementGap = () => 5 //엘리먼트간 간격
+//엘리먼트들이 프로그램(buildtrack) id에 따라 값을 갖고 생성되는게 아니라, 아래 두 함수 값을 받아서 랜덤으로 생성되는듯...
+export const buildTrackStartGap = () => 6 //엘리먼트들이 몇 칸 띄고 생성될지 결정
+export const buildElementGap = () => 5 //엘리먼트간 cell 간격
 
 //엘리먼트 길이(스케줄)
 export const buildElements = trackId => {
@@ -99,12 +100,12 @@ export const buildElements = trackId => {
   while (month < NUM_OF_MONTHS) {
     let monthSpan =  1 //엘리먼트 길이
 
-    if (month + monthSpan > NUM_OF_MONTHS) { // 길이가 월*년 전체타임라인 넘어갈때
+    if (month + monthSpan > NUM_OF_MONTHS) { // 길이가 월*년 전체타임라인 넘어갈때 조정.
       monthSpan = NUM_OF_MONTHS - month
     }
 
-    const start = addMonthsToYearAsDate(START_YEAR, month) //
-    const end = addMonthsToYearAsDate(START_YEAR, month + monthSpan) //
+    const start = addMonthsToYearAsDate(START_YEAR, month) //시작월을 시작날짜로 바꾸는 함수 필요.
+    const end = addMonthsToYearAsDate(START_YEAR, month + monthSpan)
     v.push(
       buildElement({
         trackId,
@@ -121,9 +122,10 @@ export const buildElements = trackId => {
   return v
 }
 
+//프로그램(buildTrack) 별로 서브트랙 값을 다르게 가질 수 있도록 id 추가 필요할듯.
 export const buildSubtrack = (trackId, subtrackId) => ({
   id: `track-${trackId}-${subtrackId}`,
-  title: `${subtrackId}기`,
+  title: `${subtrackId}기`, //subtrack 타이틀만 id값으로 변경.
   elements: buildElements(subtrackId),
 })
 
@@ -134,7 +136,7 @@ export const buildTrack = trackId => {
     title: COURSE_NAMES[`${trackId}` - 1],
     elements: buildElements(trackId),
     tracks,
-    // hasButton: true,
+    // hasButton: true, //링크 추가가능
     // link: 'www.google.com',
     isOpen: false,
   }
