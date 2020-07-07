@@ -14,4 +14,7 @@ export const NUM_OF_TRACKS = 6
 export const MAX_NUM_OF_SUBTRACKS = 5
 export const COURSE_NAMES = ['42Seoul', 'SSAFY', '우아한테크코스', 'SW 마에스트로', '네이버 부스트캠프', '멋쟁이사자처럼']
 export const WEEK_NAMES = ['1주', '2주', '3주', '4주']
-
+// export const Program = new Map([
+//     ['ten', 10],
+//     [],
+// ]); 
